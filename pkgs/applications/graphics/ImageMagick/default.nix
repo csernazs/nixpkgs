@@ -83,6 +83,7 @@ stdenv.mkDerivation {
     (cd "$dev/include" && ln -s ImageMagick* ImageMagick)
     moveToOutput "bin/*-config" "$dev"
     moveToOutput "lib/ImageMagick-*/config-Q16" "$dev" # includes configure params
+    install -m644 config/configure.xml $out/share/ImageMagick-6/
     for file in "$dev"/bin/*-config; do
       substituteInPlace "$file" --replace "${pkgconfig}/bin/pkg-config -config" \
         ${pkgconfig}/bin/pkg-config
